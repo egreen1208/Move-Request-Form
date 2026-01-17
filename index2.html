@@ -340,11 +340,11 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
   spinner.style.display = "block";
 
   const formData = new FormData(e.target);
+  const urlEncoded = new URLSearchParams(formData).toString();
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbwFlyZEXo9qCgI2pmcJdqrrrJ87nrdiiaeZJZiGxw0WpGyxHGa5f3RxdcjGxsHKkqKm/exec", {
-      method: "POST",
-      body: formData,
+    await fetch("https://script.google.com/macros/s/AKfycbwFR1pXFt2UeGk0RYBQfOD1OHx8hFffDwBbiEbT6rd6YpoER7IMjCwSmZcT_Nuhlvdd/exec?" + urlEncoded, {
+      method: "GET",
       mode: "no-cors"
     });
 
