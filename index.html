@@ -341,7 +341,7 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
 
   const data = Object.fromEntries(new FormData(e.target).entries());
 
-  await fetch("https://script.google.com/macros/s/AKfycbwcfRAxiJOmXxB5-6N5hJjCLWBJWLcigN3NPEQlz9djfzTi7BEdsNFBabm_S6no3a8/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbwl3quvDzwMZEjimIWkke3YQS1jYOjZSkR0LpBqKZA/dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
