@@ -339,17 +339,23 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
 
   spinner.style.display = "block";
 
-  const data = Object.fromEntries(new FormData(e.target).entries());
+  const formData = new FormData(e.target);
 
-  await fetch("https://script.google.com/macros/s/AKfycbwFlyZEXo9qCgI2pmcJdqrrrJ87nrdiiaeZJZiGxw0WpGyxHGa5f3RxdcjGxsHKkqKm/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwFlyZEXo9qCgI2pmcJdqrrrJ87nrdiiaeZJZiGxw0WpGyxHGa5f3RxdcjGxsHKkqKm/exec", {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    });
 
-  spinner.style.display = "none";
-  formSection.style.display = "none";
-  successSection.style.display = "block";
+    spinner.style.display = "none";
+    formSection.style.display = "none";
+    successSection.style.display = "block";
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    spinner.style.display = "none";
+    alert("There was an error submitting your request. Please try again.");
+  }
 });
 </script>
 
