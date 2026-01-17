@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Move Request</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Gradient Header Bar */
+  .topbar {
+    background: linear-gradient(90deg, #003f7d, #0078d4);
+    padding: 18px 30px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .topbar img {
+    height: 52px;
+  }
+
+  .topbar h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  /* Main Form Container */
+  .form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Section Wrapper */
+  .section-block {
+    background: #f9fbfd;
+    padding: 32px 32px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: #003f7d;
+    border-bottom: 2px solid #e5e5e5;
+    padding-bottom: 10px;
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 28px;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    color: #003f7d;
+  }
+
+  /* Input Styling */
+  input, select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: #fafafa;
+    transition: all 0.2s ease;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #0078d4;
+    background: #ffffff;
+    box-shadow: 0 0 4px rgba(0,120,212,0.4);
+    outline: none;
+  }
+
+  textarea {
+    height: 120px;
+    resize: vertical;
+  }
+
+  .full {
+    grid-column: span 2;
+  }
+
+  /* Submit Button */
+  button {
+    background: #0078d4;
+    color: white;
+    padding: 14px 26px;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 30px;
+  }
+
+  .button-row {
+    text-align: center;
+    margin-top: 20px;
+  }
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0,120,212,0.4);
+  }
+
+  button:hover {
+    background: #005fa3;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .spinner div {
+    width: 18px;
+    height: 18px;
+    background: #0078d4;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 0.6s infinite alternate;
+  }
+
+  .spinner div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .spinner div:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes bounce {
+    to { transform: translateY(-10px); }
+  }
+
+  /* Success Screen */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .success-message h2 {
+    color: #003f7d;
+    border: none;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #666;
+    font-size: 14px;
+  }
+
+  /* Prevent SharePoint overrides */
+  .form-container * {
+    box-sizing: border-box;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .full {
+      grid-column: span 1;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="topbar">
+  <img src="seco-logo.png" alt="SECO Energy Logo">
+  <h1>Submit a Move Request</h1>
+</div>
+
+<!-- Main Form -->
+<div class="form-container" id="formSection">
+
+  <form id="moveForm">
+
+    <h2>Your Information</h2>
+
+    <div class="section-block">
+      <div class="grid">
+        <div>
+          <label>Full Name *</label>
+          <input name="fullName" required>
+        </div>
+
+        <div>
+          <label>Email *</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div>
+          <label>Phone (Optional)</label>
+          <input name="phone">
+        </div>
+
+        <div>
+          <label>Current Location *</label>
+          <input name="currentLocation" required>
+        </div>
+
+        <div>
+          <label>New Location *</label>
+          <input name="newLocation" required>
+        </div>
+      </div>
+    </div>
+
+    <h2>Move Details</h2>
+
+    <div class="section-block">
+      <div class="grid">
+        <div>
+          <label>Department *</label>
+          <select name="department" required>
+            <option value="">Select department...</option>
+            <option>Move Request</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Category *</label>
+            <select name="category" required>
+              <option value="">Select category...</option>
+              <option>Office Move</option>
+              <option>Furniture Move</option>
+              <option>IT Equipment Move</option>
+              <option>New Hire Setup</option>
+              <option>Ergonomic Adjustment</option>
+              <option>Storage / Warehouse Move</option>
+            </select>
+
+        </div>
+
+        <div>
+          <label>Subcategory</label>
+            <select name="subcategory">
+              <option value="">Select subcategory...</option>
+              <option>Desk</option>
+              <option>Chair</option>
+              <option>Monitor</option>
+              <option>Keyboard / Mouse</option>
+              <option>Filing Cabinet</option>
+              <option>Bookshelf</option>
+              <option>Conference Table</option>
+            </select>
+
+        </div>
+
+        <div>
+          <label>Move Date *</label>
+          <input type="date" name="moveDate" required>
+        </div>
+
+        <div>
+          <label>Priority *</label>
+          <select name="priority" required>
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+        </di
+
+        <div class="full">
+          <label>Subject *</label>
+          <input name="subject" required>
+        </div>
+
+        <div class="full">
+          <label>Details *</label>
+          <textarea name="details" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Submit Move Request</button>
+
+    <!-- Loading Spinner -->
+    <div class="spinner" id="loadingSpinner">
+      <div></div><div></div><div></div>
+      <p style="margin-top:10px;color:#003f7d;">Submitting your request...</p>
+    </div>
+
+  </form>
+</div>
+
+<!-- Success Screen -->
+<div class="success-message" id="successSection">
+  <h2>Request Submitted Successfully</h2>
+  <p>Your move request has been received and a confirmation email has been sent.</p>
+  <p>A PDF copy has been stored in SharePoint.</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  SECO Energy • Facilities & IT Operations • Internal Use Only
+</div>
+
+<script>
+document.getElementById("moveForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formSection = document.getElementById("formSection");
+  const successSection = document.getElementById("successSection");
+  const spinner = document.getElementById("loadingSpinner");
+
+  spinner.style.display = "block";
+
+  const data = Object.fromEntries(new FormData(e.target).entries());
+
+  await fetch("https://script.google.com/macros/s/AKfycbwcfRAxiJOmXxB5-6N5hJjCLWBJWLcigN3NPEQlz9djfzTi7BEdsNFBabm_S6no3a8/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  spinner.style.display = "none";
+  formSection.style.display = "none";
+  successSection.style.display = "block";
+});
+</script>
+
+</body>
+</html>

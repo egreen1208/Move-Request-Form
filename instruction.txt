@@ -1,0 +1,58 @@
+Option 1 — Host Your HTML Form in SharePoint (No Server Needed)
+
+There are two ways to host HTML in SharePoint:
+
+A. Upload the HTML file and embed it on a modern page
+
+B. Use a Script Editor Web Part to paste the HTML directly
+
+I’ll show you both, starting with the easiest.
+
+⭐ A. Method 1 — Upload HTML File + Embed It (Recommended)
+
+Step 1 — Prepare your HTML file
+
+Save your form as:
+
+move-request.html
+
+Make sure the Power Automate URL is already inserted in the JavaScript.
+
+Step 2 — Upload the HTML file to SharePoint
+
+Go to your SharePoint site
+
+Open Site Contents
+
+Open the Site Assets library
+
+Upload your move-request.html file
+
+You now have a hosted URL like:
+
+https://yourcompany.sharepoint.com/sites/YourSite/SiteAssets/move-request.html
+
+Copy this URL.
+
+Step 3 — Create a SharePoint Page
+
+Go to Site Pages
+
+Click New → Site Page
+
+Give it a title like:Submit a Move Request
+
+Step 4 — Add the Embed Web Part
+
+Click the + button
+
+Search for Embed
+
+Paste the URL to your HTML file
+
+SharePoint will automatically render your form inside the page.
+
+Step 5 — Publish the Page
+
+Click PublishYour form is now live and accessible to your organization.
+
