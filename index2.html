@@ -349,17 +349,27 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
       redirect: "follow"
     });
 
-    if (response.ok) {
+    const responseText = await response.text();
+    console.log("Full Server Response:", responseText);
+    
+    // Check for errors in the response
+    if (responseText.includes("Error:")) {
+      alert("Server Error Details: " + responseText);
+      spinner.style.display = "none";
+      return;
+    }
+
+    if (response.ok && responseText.includes("Success")) {
       spinner.style.display = "none";
       formSection.style.display = "none";
       successSection.style.display = "block";
     } else {
-      throw new Error("Server responded with status: " + response.status);
+      throw new Error("Unexpected server response: " + responseText);
     }
   } catch (error) {
     console.error("Error submitting form:", error);
     spinner.style.display = "none";
-    alert("There was an error submitting your request. Please try again.");
+    alert("There was an error submitting your request: " + error.message);
   }
 });
 </script>
