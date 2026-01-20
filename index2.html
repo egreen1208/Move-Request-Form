@@ -331,13 +331,28 @@
 </div>
 
 <script>
+let isSubmitting = false; // Add this flag
+
 document.getElementById("moveForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  // Prevent double submission
+  if (isSubmitting) {
+    console.log("Form already submitting, ignoring duplicate request");
+    return;
+  }
+
+  isSubmitting = true;
 
   const formSection = document.getElementById("formSection");
   const successSection = document.getElementById("successSection");
   const spinner = document.getElementById("loadingSpinner");
+  const submitButton = e.target.querySelector('button[type="submit"]');
 
+  // Disable submit button
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting...";
+  
   spinner.style.display = "block";
 
   const formData = new FormData(e.target);
@@ -356,6 +371,9 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
     if (responseText.includes("Error:")) {
       alert("Server Error Details: " + responseText);
       spinner.style.display = "none";
+      submitButton.disabled = false;
+      submitButton.textContent = "Submit Move Request";
+      isSubmitting = false;
       return;
     }
 
@@ -363,12 +381,16 @@ document.getElementById("moveForm").addEventListener("submit", async (e) => {
       spinner.style.display = "none";
       formSection.style.display = "none";
       successSection.style.display = "block";
+      // Don't reset isSubmitting since we're done
     } else {
       throw new Error("Unexpected server response: " + responseText);
     }
   } catch (error) {
     console.error("Error submitting form:", error);
     spinner.style.display = "none";
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit Move Request";
+    isSubmitting = false;
     alert("There was an error submitting your request: " + error.message);
   }
 });
